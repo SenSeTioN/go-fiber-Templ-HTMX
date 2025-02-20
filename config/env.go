@@ -18,7 +18,7 @@ func Init() {
 }
 
 type DatabaseConfig struct {
-	url string
+	Url string
 }
 
 func getString(key, defaultValue string) string {
@@ -49,6 +49,6 @@ func getBool(key string, defaultValue bool) bool {
 
 func NewDatabaseConfig() *DatabaseConfig {
 	return &DatabaseConfig{
-		url: getString("DATABASE_URL", ""),
+		Url: getString("DATABASE_URL", ""),
 	}
 }
