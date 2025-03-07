@@ -13,12 +13,13 @@ import (
 func main() {
 	config.Init()
 	config.NewDatabaseConfig()
-	logConfig := config.NewLogConfig()
-	customLogger := logger.NewLogger(logConfig)
 
 	app := fiber.New()
-	app.Use(slogfiber.New(customLogger))
 	app.Use(recover.New())
+
+	logConfig := config.NewLogConfig()
+	customLogger := logger.NewLogger(logConfig)
+	app.Use(slogfiber.New(customLogger))
 
 	pages.SetupRoutes(app)
 
