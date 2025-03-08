@@ -21,6 +21,11 @@ type DatabaseConfig struct {
 	Url string
 }
 
+type LogConfig struct {
+	Level  int
+	Format string
+}
+
 func getString(key, defaultValue string) string {
 	value := os.Getenv(key)
 	if value == "" {
@@ -50,5 +55,12 @@ func getBool(key string, defaultValue bool) bool {
 func NewDatabaseConfig() *DatabaseConfig {
 	return &DatabaseConfig{
 		Url: getString("DATABASE_URL", ""),
+	}
+}
+
+func NewLogConfig() *LogConfig {
+	return &LogConfig{
+		Level:  getInt("LOG_LEVEL", 0),
+		Format: getString("LOG_FORMAT", "json"),
 	}
 }
