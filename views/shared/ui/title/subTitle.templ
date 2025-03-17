@@ -1,0 +1,27 @@
+package title
+
+type SubTitleProps struct {
+	Text  string
+	Color string
+	Size  string
+}
+
+css subTitleClass(props SubTitleProps) {
+	font-size: { props.Size };
+	color: { templ.SafeCSSProperty(GetColor(props.Color)) };
+}
+
+templ SubTitle(props SubTitleProps) {
+	@SubTitleCSS()
+	<p class={ subTitleClass(props), "subTitle" }>{ props.Text }</p>
+}
+
+templ SubTitleCSS() {
+	<style>
+	.subTitle{
+		font-weight: 400 ;
+		line-height: 20px;
+		letter-spacing: 0.25px;
+	}
+	</style>
+}

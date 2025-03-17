@@ -1,0 +1,27 @@
+package logo
+
+templ Logo(href string) {
+	@LogoCSS()
+	<div class="logo">
+		<a href={ templ.SafeURL(href) }>
+			<h1 class="logo__title">
+				Новости
+			</h1>
+		</a>
+	</div>
+}
+
+templ LogoCSS() {
+	<style>
+		.logo__title {
+			font-weight: 700;
+			font-size: 22px;
+			line-height: 100%;
+			color: var(--color-orange);
+		}
+		.logo__title:hover {
+			color: var(--color-orange-h);
+			transition: color 0.3s ease-in-out;
+		}
+	</style>
+}

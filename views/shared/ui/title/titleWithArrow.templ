@@ -1,0 +1,18 @@
+package title
+
+templ TitleWithArrow(props TitleProps) {
+	@TitleWithArrowCSS()
+	<div class="title-arrow">
+		@Title(props)
+		<img src="/public/images/icons/arrow-down.svg"/>
+	</div>
+}
+
+templ TitleWithArrowCSS() {
+	<style>
+		.title-arrow{
+			display: flex;
+			gap: 4px;
+		}
+	</style>
+}

@@ -7,8 +7,8 @@ import (
 )
 
 func SetupRoutes(app *fiber.App) {
-	v := app.Group("/v1")
-	api := v.Group("/api")
+	// v := app.Group("/v1")
+	// api := v.Group("/api")
 
-	home.NewHandler(api)
+	home.NewHandler(app)
 }
