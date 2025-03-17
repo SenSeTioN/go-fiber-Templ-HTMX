@@ -23,7 +23,7 @@ func main() {
 	app.Use(slogfiber.New(customLogger))
 	app.Static("/public", "./public")
 
-	pages.SetupRoutes(app, customLogger)
+	pages.SetupRoutes(app)
 
 	customLogger.Info("Запуск сервера на :4242")
 	if err := app.Listen(":4242"); err != nil {
