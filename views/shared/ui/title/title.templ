@@ -1,0 +1,55 @@
+package title
+
+import (
+	"fmt"
+	"regexp"
+)
+
+type TitleProps struct {
+	Text         string
+	Size         string
+	FontWeight   string
+	Color        string
+	IsActiveMenu bool
+}
+
+func GetColor(color string) string {
+	hexOrRGBRegex := regexp.MustCompile(`^(#|rgb|rgba)`)
+	cssVarRegex := regexp.MustCompile(`^--`)
+
+	switch {
+	case hexOrRGBRegex.MatchString(color):
+		return color
+	case cssVarRegex.MatchString(color):
+		return fmt.Sprintf("var(%s)", color)
+	default:
+		return color
+	}
+}
+
+css titleClass(props TitleProps) {
+	font-size: { props.Size };
+	font-weight: { props.FontWeight };
+	color: { templ.SafeCSSProperty(GetColor(props.Color)) };
+	line-height: { "100%" };
+}
+
+templ Title(props TitleProps) {
+	@TitleCSS(props)
+	<h2 class={ titleClass(props), "active-menu" }>
+		{ props.Text }
+	</h2>
+}
+
+templ TitleCSS(props TitleProps) {
+	if props.IsActiveMenu {
+		<style>
+		.active-menu {
+			cursor: pointer;
+		}
+		.active-menu:hover{
+			color: var(--color-light-grey-pr)
+		}
+	</style>
+	}
+}
