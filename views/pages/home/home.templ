@@ -1,0 +1,15 @@
+package home
+
+import "sensetion/go-fiber/views/app/layout"
+import "sensetion/go-fiber/views/widgets/header"
+import "sensetion/go-fiber/views/widgets/footer"
+
+templ HomePage() {
+	@layout.Layout(layout.LayoutProps{
+		Title:           "Статьи обо всем",
+		MetaDescription: "Сайт по поиску статей",
+	}) {
+		@header.Header()
+		@footer.Footer()
+	}
+}

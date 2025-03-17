@@ -1,0 +1,58 @@
+package footer
+
+import "sensetion/go-fiber/views/shared/ui/title"
+
+templ Footer() {
+	@FooterCSS()
+	<footer class="footer">
+		<div class="footer__policy">
+			<a href="#">
+				@title.SubTitle(title.SubTitleProps{
+					Text:  "Правила обработки персональных данных",
+					Size:  "12px",
+					Color: "--color-light-grey-pr",
+				})
+			</a>
+		</div>
+		<div class="footer__copyright">
+			<a href="#">
+				@title.SubTitle(title.SubTitleProps{
+					Text:  "Все права защищены 2025",
+					Size:  "12px",
+					Color: "--color-light-grey-pr",
+				})
+			</a>
+		</div>
+	</footer>
+}
+
+templ FooterCSS() {
+	<style>
+		.footer{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			max-width: 908px;
+			width: 100%;
+			max-height: 48px;
+			height: 100%;
+			padding-inline: 45px;
+			margin-top: 55px;
+			background-color: #3E32320D;
+		}
+
+		.footer__policy{
+			display: flex;
+			align-items: center;
+			max-width: 500px;
+			width: 100%;
+		}
+
+		.footer__copyright{
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			width: 100%;
+		}
+	</style>
+}

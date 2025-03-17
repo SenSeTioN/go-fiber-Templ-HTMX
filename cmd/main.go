@@ -7,7 +7,6 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
-	"github.com/gofiber/template/html/v2"
 	slogfiber "github.com/samber/slog-fiber"
 )
 
@@ -15,18 +14,16 @@ func main() {
 	config.Init()
 	config.NewDatabaseConfig()
 
-	engine := html.New("./html", ".html")
-
-	app := fiber.New(fiber.Config{
-		Views: engine,
-	})
+	app := fiber.New()
 	app.Use(recover.New())
 
 	logConfig := config.NewLogConfig()
 	customLogger := logger.NewLogger(logConfig)
-	app.Use(slogfiber.New(customLogger))
 
-	pages.SetupRoutes(app)
+	app.Use(slogfiber.New(customLogger))
+	app.Static("/public", "./public")
+
+	pages.SetupRoutes(app, customLogger)
 
 	customLogger.Info("Запуск сервера на :4242")
 	if err := app.Listen(":4242"); err != nil {

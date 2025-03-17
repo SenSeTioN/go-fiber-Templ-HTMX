@@ -1,0 +1,116 @@
+package header
+
+import "sensetion/go-fiber/views/shared/ui/title"
+import "sensetion/go-fiber/views/entities/logo"
+import "sensetion/go-fiber/views/entities/search"
+import "sensetion/go-fiber/views/entities/tagsMenu"
+
+templ Header() {
+	@HeaderCSS()
+	<header class="header">
+		<div class="header__container">
+			<div class="header__container__left-menu">
+				@logo.Logo("/v1/api")
+				@title.TitleWithArrow(title.TitleProps{
+					Text:         "Категории",
+					Size:         "16px",
+					FontWeight:   "500",
+					Color:        "--color-light-grey",
+					IsActiveMenu: true,
+				})
+				@title.Title(title.TitleProps{
+					Text:         "Контакты",
+					Size:         "16px",
+					FontWeight:   "500",
+					Color:        "--color-light-grey",
+					IsActiveMenu: true,
+				})
+			</div>
+			<div class="header__container__right-menu">
+				@search.Search()
+				<div class="header__container__right-menu-lk">
+					@title.Title(title.TitleProps{
+						Text:         "Вход",
+						Size:         "16px",
+						FontWeight:   "500",
+						Color:        "--color-light-grey",
+						IsActiveMenu: true,
+					})
+					@title.Title(title.TitleProps{
+						Text:         "Регистрация",
+						Size:         "16px",
+						FontWeight:   "500",
+						Color:        "--color-light-grey",
+						IsActiveMenu: true,
+					})
+				</div>
+			</div>
+		</div>
+		<div class="navBar-container">
+			@tagsMenu.TagsMenu()
+			<img src="/public/images/icons/arrow-right.svg"/>
+		</div>
+	</header>
+}
+
+templ HeaderCSS() {
+	<style>
+		.header {
+			max-width: 1512px;
+			width: 100%;
+			display: flex;
+			padding: 45px 40px 0;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.header__container{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			width: 100%;
+		}
+
+		.header__container__left-menu{
+			display: flex;
+			align-items: center;
+			gap: 68px;
+			max-width: 670px;
+			width: 100%;
+		}
+
+		.header__container__right-menu {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			max-width: 545px;
+			width: 100%;
+			gap: 25px;
+		}
+
+		.header__container__right-menu-lk{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 25px;
+			max-width: 170px;
+			width: 100%;
+		}
+
+		.navBar-container{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 122px;
+			max-height: 68px;
+			height: 100%;
+			padding: 10px 10px 10px 22px;
+			margin-top: 45px;
+			border-radius: var(--border-radius-m);
+			background-color: var(--bg-light-grey);
+		}
+
+	</style>
+}

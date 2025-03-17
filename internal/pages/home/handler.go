@@ -1,19 +1,22 @@
 package home
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"log/slog"
+	"sensetion/go-fiber/pkg/tadapter"
+	"sensetion/go-fiber/views/pages/home"
+
+	"github.com/gofiber/fiber/v2"
+)
 
 type HomeHandler struct {
 	router fiber.Router
+	logger *slog.Logger
 }
 
-type MenuTab struct {
-	Id   int
-	Name string
-}
-
-func NewHandler(router fiber.Router) {
+func NewHandler(router fiber.Router, logger *slog.Logger) {
 	h := &HomeHandler{
 		router: router,
+		logger: logger,
 	}
 
 	h.registerRoutes()
@@ -21,23 +24,17 @@ func NewHandler(router fiber.Router) {
 
 func (h *HomeHandler) registerRoutes() {
 	h.router.Get("/", h.home)
-	h.router.Get("/error", h.error)
+	h.router.Get("/404", h.error)
 }
 
 func (h *HomeHandler) home(c *fiber.Ctx) error {
-	menuTabs := []MenuTab{
-		{Id: 1, Name: "Еда"},
-		{Id: 2, Name: "Животные"},
-		{Id: 3, Name: "Машины"},
-		{Id: 4, Name: "Спорт"},
-		{Id: 5, Name: "Музыка"},
-		{Id: 6, Name: "Технологии"},
-		{Id: 7, Name: "Прочее"},
-	}
+	component := home.HomePage()
 
-	return c.Render("home", fiber.Map{"MenuTabs": menuTabs})
+	return tadapter.Render(c, component)
 }
 
 func (h *HomeHandler) error(c *fiber.Ctx) error {
+	h.logger.Error("Page not found", "url", c.OriginalURL())
+
 	return fiber.NewError(fiber.StatusBadRequest, "Limit params is undefined")
 }

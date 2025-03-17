@@ -1,0 +1,67 @@
+package tagsMenu
+
+import "sensetion/go-fiber/views/shared/ui/tag"
+
+func getTags() []tag.TagProps {
+	tagsContainer := []tag.TagProps{
+		{
+			Text:   "#Еда",
+			IMGSrc: "/public/images/bgs/food.png",
+			Href:   "#",
+		},
+		{
+			Text:   "#Животные",
+			IMGSrc: "/public/images/bgs/animal.png",
+			Href:   "#",
+		},
+		{
+			Text:   "#Машины",
+			IMGSrc: "/public/images/bgs/car.png",
+			Href:   "#",
+		},
+		{
+			Text:   "#Спорт",
+			IMGSrc: "/public/images/bgs/sport.png",
+			Href:   "#",
+		},
+		{
+			Text:   "#Музыка",
+			IMGSrc: "/public/images/bgs/music.png",
+			Href:   "#",
+		},
+		{
+			Text:   "#Технологии",
+			IMGSrc: "/public/images/bgs/technology.png",
+			Href:   "#",
+		},
+		{
+			Text:   "#Прочее",
+			IMGSrc: "/public/images/bgs/abstract.png",
+			Href:   "#",
+		},
+	}
+
+	return tagsContainer
+}
+
+templ TagsMenu() {
+	@TagsMenuCSS()
+	<nav class="navBar">
+		for _, t := range getTags() {
+			@tag.Tag(tag.TagProps{
+				Text:   t.Text,
+				IMGSrc: t.IMGSrc,
+				Href:   t.Href,
+			})
+		}
+	</nav>
+}
+
+templ TagsMenuCSS() {
+	<style>
+		.navBar {
+			display: flex;
+			gap: 24px;
+		}
+	</style>
+}
