@@ -13,11 +13,6 @@ type HomeHandler struct {
 	logger *slog.Logger
 }
 
-type MenuTab struct {
-	Id   int
-	Name string
-}
-
 func NewHandler(router fiber.Router, logger *slog.Logger) {
 	h := &HomeHandler{
 		router: router,
