@@ -3,6 +3,7 @@ package home
 import "sensetion/go-fiber/views/app/layout"
 import "sensetion/go-fiber/views/widgets/header"
 import "sensetion/go-fiber/views/widgets/footer"
+import "sensetion/go-fiber/views/widgets/mainTag"
 
 templ HomePage() {
 	@layout.Layout(layout.LayoutProps{
@@ -10,6 +11,7 @@ templ HomePage() {
 		MetaDescription: "Сайт по поиску статей",
 	}) {
 		@header.Header()
+		@mainTag.MainTag()
 		@footer.Footer()
 	}
 }
