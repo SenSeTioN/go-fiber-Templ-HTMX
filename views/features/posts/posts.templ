@@ -1,0 +1,75 @@
+package posts
+
+import "sensetion/go-fiber/views/entities/card"
+
+type PostsProps struct {
+	IsPopular bool
+	IsLast    bool
+}
+
+templ Posts(props PostsProps) {
+	@PostsCSS(props)
+	if props.IsPopular == true {
+		<div class="posts-container">
+			for _, p := range getPopularPosts() {
+				@card.CardM(card.CardMProps{
+					TitleText:    p.TitleText,
+					SubTitleText: p.SubTitleText,
+					IMGSrc:       p.IMGSrc,
+					AvatarSrc:    p.AvatarSrc,
+					UserName:     p.UserName,
+					DateText:     p.DateText,
+				})
+			}
+		</div>
+	}
+}
+
+templ PostsCSS(props PostsProps) {
+	<style>
+		.posts-container{
+			display: flex;
+			align-items: center;
+			width: 100%;
+			gap: 24px;
+			margin-top: 60px;
+		}
+	</style>
+}
+
+func getPopularPosts() []card.CardMProps {
+	return []card.CardMProps{
+		{
+			TitleText:    "Открытие сезона байдарок",
+			SubTitleText: "Сегодня был открыт сезон путешествия на байдарках, где вы можете поучаствовать в ...",
+			UserName:     "Михаил Аршинов",
+			DateText:     "Август 18 , 2025",
+			IMGSrc:       "/public/images/posts/sport.png",
+			AvatarSrc:    "/public/images/avatar/unsplash_ZHvM3XIOHoE.png",
+		},
+		{
+			TitleText:    "Выбери правильный ноутбук для задач",
+			SubTitleText: "От верного выбора ноутбука зависит не только удобство, но и эффективность работы...",
+			UserName:     "Вася Программист",
+			DateText:     "Июль 25 , 2025",
+			IMGSrc:       "/public/images/posts/unsplash_mP7aPSUm7aE.png",
+			AvatarSrc:    "/public/images/avatar/unsplash_kq8dGNS1lLk.png",
+		},
+		{
+			TitleText:    "Создание автомобилей с автопилотом",
+			SubTitleText: "Электрические автомобили без водителя скоро станут реальностью, где нам не придётся ...",
+			UserName:     "Мария",
+			DateText:     "Июль 14 , 2025",
+			IMGSrc:       "/public/images/posts/unsplash_-js8KGQLfhw.png",
+			AvatarSrc:    "/public/images/avatar/unsplash_0wRXAXqIp58.png",
+		},
+		{
+			TitleText:    "Как быстро приготовить вкусный обед",
+			SubTitleText: "Сегодня поговорим о том, как можно быстро и эффективно приготовить обед для ...",
+			UserName:     "Ли Сюн",
+			DateText:     "Май 10 , 2025",
+			IMGSrc:       "/public/images/posts/unsplash_DGHy9KgdTj0.png",
+			AvatarSrc:    "/public/images/avatar/unsplash_L2dTmhQzx4Q.png",
+		},
+	}
+}

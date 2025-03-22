@@ -11,6 +11,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import "sensetion/go-fiber/views/app/layout"
 import "sensetion/go-fiber/views/widgets/header"
 import "sensetion/go-fiber/views/widgets/footer"
+import "sensetion/go-fiber/views/widgets/mainTag"
 
 func HomePage() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -50,6 +51,14 @@ func HomePage() templ.Component {
 				return templ_7745c5c3_Err
 			}
 			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, " ")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = mainTag.MainTag().Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, " ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
