@@ -46,9 +46,8 @@ templ Title(props TitleProps) {
 	</h2>
 }
 
-templ TitleCSS(props TitleProps) {
-	if props.IsActiveMenu {
-		<style>
+templ TitleCSS() {
+	<style>
 		.active-menu {
 			cursor: pointer;
 		}
@@ -56,5 +55,4 @@ templ TitleCSS(props TitleProps) {
 			color: var(--color-light-grey-pr)
 		}
 	</style>
-	}
 }
