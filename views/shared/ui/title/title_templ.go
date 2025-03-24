@@ -69,11 +69,14 @@ func Title(props TitleProps) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = TitleCSS(props).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = TitleCSS().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var2 = []any{titleClass(props), "active-menu"}
+		var templ_7745c5c3_Var2 = []any{
+			titleClass(props),
+			templ.KV("active-menu", props.IsActiveMenu),
+		}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -98,7 +101,7 @@ func Title(props TitleProps) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(props.Text)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/shared/ui/title/title.templ`, Line: 40, Col: 14}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `views/shared/ui/title/title.templ`, Line: 45, Col: 14}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -134,7 +137,7 @@ func TitleCSS(props TitleProps) templ.Component {
 		}
 		ctx = templ.ClearChildren(ctx)
 		if props.IsActiveMenu {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<style>\r\n\t\t.active-menu {\r\n\t\t\tcursor: pointer;\r\n\t\t}\r\n\t\t.active-menu:hover{\r\n\t\t\tcolor: var(--color-light-grey-pr)\r\n\t\t}\r\n\t</style>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<style>\n\t\t.active-menu {\n\t\t\tcursor: pointer;\n\t\t}\n\t\t.active-menu:hover{\n\t\t\tcolor: var(--color-light-grey-pr)\n\t\t}\n\t</style>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
