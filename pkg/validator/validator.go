@@ -10,7 +10,7 @@ func FormatErrors(errors *validate.Errors) string {
 	var res string
 
 	for _, v := range errors.Errors {
-		res += strings.Join(v, ", ") + "\n"
+		res += strings.Join(v, ", ") + " "
 	}
 
 	return res
