@@ -1,14 +1,26 @@
 package input
 
+import "sensetion/go-fiber/views/shared/ui/title"
+
 type InputProps struct {
-	Text   string
-	IMGSrc string
+	PlaceholderText string
+	LabelText       string
+	IMGSrc          string
+	Name            string
 }
 
 templ InputText(props InputProps) {
 	@InputTextCSS()
 	<label class="input-container">
-		<input type="text" placeholder={ props.Text } class="input-text"/>
+		if props.LabelText != "" {
+			@title.Title(title.TitleProps{
+				Text:       props.LabelText,
+				Color:      "--color-light-grey",
+				Size:       "16px",
+				FontWeight: "500",
+			})
+		}
+		<input type="text" name={ props.Name } placeholder={ props.PlaceholderText } class="input-text"/>
 		if props.IMGSrc != "" {
 			<img src={ props.IMGSrc } class="input-container__search-icon"/>
 		}
@@ -20,10 +32,13 @@ templ InputTextCSS() {
 		.input-container{
 			position: relative;
 			display: flex;
-			align-items: center;
-			max-width: 300px;
-			min-width: 50px;
+			flex-direction: column;
+			gap: 8px;
 			width: 100%;
+
+			& h2 {
+				margin-left: 5px;
+			}
 		}
 		.input-text{
 			display: flex;

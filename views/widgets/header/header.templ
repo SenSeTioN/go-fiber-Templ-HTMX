@@ -10,7 +10,7 @@ templ Header() {
 	<header class="header">
 		<div class="header__container">
 			<div class="header__container__left-menu">
-				@logo.Logo("/v1/api")
+				@logo.Logo("/")
 				@title.TitleWithArrow(title.TitleProps{
 					Text:         "Категории",
 					Size:         "16px",
@@ -36,13 +36,15 @@ templ Header() {
 						Color:        "--color-light-grey",
 						IsActiveMenu: true,
 					})
-					@title.Title(title.TitleProps{
-						Text:         "Регистрация",
-						Size:         "16px",
-						FontWeight:   "500",
-						Color:        "--color-light-grey",
-						IsActiveMenu: true,
-					})
+					<a href="/auth/registration">
+						@title.Title(title.TitleProps{
+							Text:         "Регистрация",
+							Size:         "16px",
+							FontWeight:   "500",
+							Color:        "--color-light-grey",
+							IsActiveMenu: true,
+						})
+					</a>
 				</div>
 			</div>
 		</div>

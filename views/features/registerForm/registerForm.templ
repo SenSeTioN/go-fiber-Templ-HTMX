@@ -1,0 +1,104 @@
+package registerForm
+
+import "sensetion/go-fiber/views/shared/ui/input"
+import "sensetion/go-fiber/views/shared/ui/title"
+import "sensetion/go-fiber/views/shared/ui/decorativeElms"
+import "sensetion/go-fiber/views/shared/ui/button"
+
+templ RegisterForm() {
+	@RegisterFormCSS()
+	<form hx-post="/v1/api/auth/register" hx-trigger="submit" hx-target="#register-res" hx-swap="innerHTML swap:0.5s" class="form-reg">
+		<div class="form-reg__title">
+			@decorativeElms.Rectangle()
+			@title.Title(title.TitleProps{
+				Text: "Регистрация на сайте",
+			})
+		</div>
+		<div class="form-reg__inputs-block">
+			@input.InputText(input.InputProps{
+				LabelText: "Имя",
+				Name:      "name",
+			})
+			@input.InputText(input.InputProps{
+				LabelText: "Email",
+				Name:      "email",
+			})
+			@input.InputText(input.InputProps{
+				LabelText: "Пароль",
+				Name:      "password",
+			})
+		</div>
+		<div class="form-reg__btn">
+			@button.FormBTN() {
+				@title.Title(title.TitleProps{
+					Text:       "Зарегистрироваться",
+					Color:      "--color-white",
+					FontWeight: "500",
+					Size:       "18px",
+				})
+				@decorativeElms.Loader()
+			}
+		</div>
+		<div id="register-res"></div>
+	</form>
+}
+
+templ RegisterFormCSS() {
+	<style>
+		.form-reg{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			max-width: 500px;
+			width: 100%;
+			margin-block: 100px 115px;
+			padding-inline: 15px;
+		}
+
+		.form-reg__title{
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			margin-bottom: 40px;
+		}
+
+		.form-reg__inputs-block{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			gap: 25px;
+			width: 100%;
+		}
+
+		.form-reg__btn{
+			margin-top: 50px;
+		}
+
+
+		.form-reg__btn .form-btn .loader{
+			display: none;
+		}
+
+		.htmx-request .form-reg__btn {
+			& .form-btn {
+				pointer-events: none;
+				cursor: not-allowed;
+
+				& .loader{
+					display: block;
+				}
+
+				& h2 {
+					display: none;
+				}
+			}
+		}
+
+		.htmx-swapping .notification {
+			opacity: 0;
+			transition: opacity 1s ease-out;
+		}
+	</style>
+}

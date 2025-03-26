@@ -1,6 +1,10 @@
 package posts
 
-import "sensetion/go-fiber/views/entities/card"
+import (
+	"sensetion/go-fiber/views/entities/card"
+	"sensetion/go-fiber/views/shared/ui/decorativeElms"
+	"sensetion/go-fiber/views/shared/ui/title"
+)
 
 type PostsProps struct {
 	IsPopular bool
@@ -10,17 +14,25 @@ type PostsProps struct {
 templ Posts(props PostsProps) {
 	@PostsCSS(props)
 	if props.IsPopular == true {
-		<div class="posts-container">
-			for _, p := range getPopularPosts() {
-				@card.CardM(card.CardMProps{
-					TitleText:    p.TitleText,
-					SubTitleText: p.SubTitleText,
-					IMGSrc:       p.IMGSrc,
-					AvatarSrc:    p.AvatarSrc,
-					UserName:     p.UserName,
-					DateText:     p.DateText,
+		<div style="margin-top: 60px;">
+			<div class="posts-container__title">
+				@decorativeElms.Rectangle()
+				@title.Title(title.TitleProps{
+					Text: "Популярное",
 				})
-			}
+			</div>
+			<div class="posts-container">
+				for _, p := range getPopularPosts() {
+					@card.CardM(card.CardMProps{
+						TitleText:    p.TitleText,
+						SubTitleText: p.SubTitleText,
+						IMGSrc:       p.IMGSrc,
+						AvatarSrc:    p.AvatarSrc,
+						UserName:     p.UserName,
+						DateText:     p.DateText,
+					})
+				}
+			</div>
 		</div>
 	}
 }
@@ -32,7 +44,13 @@ templ PostsCSS(props PostsProps) {
 			align-items: center;
 			width: 100%;
 			gap: 24px;
-			margin-top: 60px;
+		}
+
+		.posts-container__title{
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			margin-bottom: 38px;
 		}
 	</style>
 }

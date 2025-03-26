@@ -1,0 +1,17 @@
+package decorativeElms
+
+templ Rectangle() {
+	@RectangleCSS()
+	<div class="red-pillar"></div>
+}
+
+templ RectangleCSS() {
+	<style>
+		.red-pillar {
+			width: 4px;
+			height: 10px;
+			background-color: #F81539;
+			border-radius: var(--border-radius-m);
+		}
+	</style>
+}

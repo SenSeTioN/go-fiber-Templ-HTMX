@@ -1,14 +1,9 @@
 package mainTag
 
-import "sensetion/go-fiber/views/features/posts"
-
 templ MainTag() {
 	@MainTagCSS()
 	<main class="main-content">
-		@posts.HeroPosts()
-		@posts.Posts(posts.PostsProps{
-			IsPopular: true,
-		})
+		{ children... }
 	</main>
 }
 

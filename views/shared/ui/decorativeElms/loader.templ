@@ -1,0 +1,31 @@
+package decorativeElms
+
+templ Loader() {
+	@LoaderCSS()
+	<div class="loader"></div>
+}
+
+templ LoaderCSS() {
+	<style>
+		.loader {
+			width: 18px;
+			height: 18px;
+			border-radius: 50%;
+			display: none;
+			border-top: 3px solid #6ebeff;
+			border-right: 3px solid transparent;
+			box-sizing: border-box;
+			animation: rotation 1s linear infinite;
+		}
+
+		@keyframes rotation {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+</style>
+}
