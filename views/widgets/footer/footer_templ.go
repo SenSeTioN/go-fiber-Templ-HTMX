@@ -88,7 +88,7 @@ func FooterCSS() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<style>\n\t\t.footer{\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: space-between;\n\t\t\tmax-width: 908px;\n\t\t\twidth: 100%;\n\t\t\tpadding: 17px 45px;\n\t\t\tmargin-top: 55px;\n\t\t\tbackground-color: #3E32320D;\n\t\t}\n\n\t\t.footer__policy{\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tmax-width: 500px;\n\t\t\twidth: 100%;\n\t\t}\n\n\t\t.footer__copyright{\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: flex-end;\n\t\t\twidth: 100%;\n\t\t}\n\t</style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<style>\r\n\t\t.footer{\r\n\t\t\tdisplay: flex;\r\n\t\t\talign-items: center;\r\n\t\t\tjustify-content: space-between;\r\n\t\t\tmax-width: 908px;\r\n\t\t\twidth: 100%;\r\n\t\t\tpadding: 17px 45px;\r\n\t\t\tmargin-top: 55px;\r\n\t\t\tbackground-color: #3E32320D;\r\n\t\t}\r\n\r\n\t\t.footer__policy{\r\n\t\t\tdisplay: flex;\r\n\t\t\talign-items: center;\r\n\t\t\tmax-width: 500px;\r\n\t\t\twidth: 100%;\r\n\t\t}\r\n\r\n\t\t.footer__copyright{\r\n\t\t\tdisplay: flex;\r\n\t\t\talign-items: center;\r\n\t\t\tjustify-content: flex-end;\r\n\t\t\twidth: 100%;\r\n\t\t}\r\n\t</style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

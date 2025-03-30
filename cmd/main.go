@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"sensetion/go-fiber/config"
 	"sensetion/go-fiber/internal/pages"
+	"sensetion/go-fiber/pkg/database"
 	"sensetion/go-fiber/pkg/logger"
 
 	"github.com/gofiber/fiber/v2"
@@ -12,7 +14,7 @@ import (
 
 func main() {
 	config.Init()
-	config.NewDatabaseConfig()
+	dbConfig := config.NewDatabaseConfig()
 
 	app := fiber.New()
 	app.Use(recover.New())
@@ -23,10 +25,18 @@ func main() {
 	app.Use(slogfiber.New(customLogger))
 	app.Static("/public", "./public")
 
-	pages.SetupRoutes(app)
+	dbpool := database.CreateDBPool(dbConfig, customLogger)
+	defer dbpool.Close()
 
-	customLogger.Info("Запуск сервера на :4242")
-	if err := app.Listen(":4242"); err != nil {
+	pages.SetupRoutes(&pages.SetupRoutesArgs{
+		App:    app,
+		DBPool: dbpool,
+		Logger: customLogger,
+	})
+
+	port := config.GetPort()
+	customLogger.Info(fmt.Sprintf("Сервер запущен на порту %s", port))
+	if err := app.Listen(port); err != nil {
 		customLogger.Error("Ошибка при запуске сервера", "error", err)
 	}
 }
