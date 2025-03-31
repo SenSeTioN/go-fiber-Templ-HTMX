@@ -1,6 +1,9 @@
 package auth
 
 import (
+	"fmt"
+	"sensetion/go-fiber/internal/types"
+	"sensetion/go-fiber/internal/users"
 	"sensetion/go-fiber/pkg/tadapter"
 	"sensetion/go-fiber/pkg/validator"
 	"sensetion/go-fiber/views/entities/notification"
@@ -13,12 +16,14 @@ import (
 )
 
 type AuthHandler struct {
-	router fiber.Router
+	router     fiber.Router
+	repository *users.UserRepository
 }
 
-func NewAuthHandler(router fiber.Router) {
+func NewAuthHandler(router fiber.Router, repository *users.UserRepository) {
 	h := &AuthHandler{
-		router: router,
+		router:     router,
+		repository: repository,
 	}
 
 	h.registerRoutes()
@@ -31,13 +36,14 @@ func (h *AuthHandler) registerRoutes() {
 	apiRouter.Post("/register", h.registration)
 	authRouter.Get("/registration", h.registrationPage)
 }
+
 func (h *AuthHandler) registrationPage(c *fiber.Ctx) error {
 	component := registration.RegistrationPage()
 	return tadapter.Render(c, component)
 }
 
 func (h *AuthHandler) registration(c *fiber.Ctx) error {
-	form := AuthRegisterForm{
+	form := types.AuthRegisterForm{
 		Name:     c.FormValue("name"),
 		Email:    c.FormValue("email"),
 		Password: c.FormValue("password"),
@@ -68,6 +74,12 @@ func (h *AuthHandler) registration(c *fiber.Ctx) error {
 		return tadapter.Render(c, component)
 	}
 
-	component = notification.Notification("Регистрация успешна", notification.NotificationSuccess)
+	err := h.repository.CreateUser(form)
+	if err != nil {
+		component = notification.Notification(err.Error(), notification.NotificationFail)
+		return tadapter.Render(c, component)
+	}
+
+	component = notification.Notification(fmt.Sprintf("Пользователь %s успешно зарегистрирован", form.Email), notification.NotificationSuccess)
 	return tadapter.Render(c, component)
 }

@@ -1,4 +1,6 @@
 /.env
 .vscode
 .cspell
-tmp
+/tmp
+/postgres-data
+/sql

@@ -1,0 +1,13 @@
+services:
+  postgres:
+    container_name: postgres_go-fiber-posts
+    image: postgres:16.4
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      # значение по умолчанию'/data/postgres' (:- значение по умолчанию)
+      PGDATA: ${PGDATA:-/data/postgres}
+    volumes:
+      - ./postgres-data:${PGDATA:-/data/postgres}
+    ports:
+      - '${POSTGRES_PORT:-5433}:${POSTGRES_INTERNAL_PORT:-5432}'
