@@ -10,13 +10,13 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-type SetupRoutesArgs struct {
+type SetupRoutesDeps struct {
 	DBPool *pgxpool.Pool
 	Logger *slog.Logger
 	App    *fiber.App
 }
 
-func SetupRoutes(args *SetupRoutesArgs) {
+func SetupRoutes(args *SetupRoutesDeps) {
 	//Repositories
 	userRepo := users.NewUserRepository(args.DBPool, args.Logger)
 

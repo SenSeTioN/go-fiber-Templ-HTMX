@@ -31,15 +31,15 @@ func NewAuthHandler(router fiber.Router, repository *users.UserRepository) {
 
 func (h *AuthHandler) registerRoutes() {
 	apiRouter := h.router.Group("/v1/api/auth")
-	authRouter := h.router.Group("/auth")
-
 	apiRouter.Post("/register", h.registration)
+
+	authRouter := h.router.Group("/auth")
 	authRouter.Get("/registration", h.registrationPage)
 }
 
 func (h *AuthHandler) registrationPage(c *fiber.Ctx) error {
 	component := registration.RegistrationPage()
-	return tadapter.Render(c, component)
+	return tadapter.Render(c, component, fiber.StatusOK)
 }
 
 func (h *AuthHandler) registration(c *fiber.Ctx) error {
@@ -71,15 +71,15 @@ func (h *AuthHandler) registration(c *fiber.Ctx) error {
 
 	if len(errors.Errors) > 0 {
 		component = notification.Notification(validator.FormatErrors(errors), notification.NotificationFail)
-		return tadapter.Render(c, component)
+		return tadapter.Render(c, component, fiber.StatusBadRequest)
 	}
 
 	err := h.repository.CreateUser(form)
 	if err != nil {
 		component = notification.Notification(err.Error(), notification.NotificationFail)
-		return tadapter.Render(c, component)
+		return tadapter.Render(c, component, fiber.StatusBadRequest)
 	}
 
 	component = notification.Notification(fmt.Sprintf("Пользователь %s успешно зарегистрирован", form.Email), notification.NotificationSuccess)
-	return tadapter.Render(c, component)
+	return tadapter.Render(c, component, fiber.StatusOK)
 }

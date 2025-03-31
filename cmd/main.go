@@ -28,7 +28,7 @@ func main() {
 	dbpool := database.CreateDBPool(dbConfig, customLogger)
 	defer dbpool.Close()
 
-	pages.SetupRoutes(&pages.SetupRoutesArgs{
+	pages.SetupRoutes(&pages.SetupRoutesDeps{
 		App:    app,
 		DBPool: dbpool,
 		Logger: customLogger,

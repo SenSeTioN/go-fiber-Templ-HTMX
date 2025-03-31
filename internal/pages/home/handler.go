@@ -27,7 +27,7 @@ func (h *HomeHandler) registerRoutes() {
 func (h *HomeHandler) home(c *fiber.Ctx) error {
 	component := home.HomePage()
 
-	return tadapter.Render(c, component)
+	return tadapter.Render(c, component, fiber.StatusOK)
 }
 
 func (h *HomeHandler) error(c *fiber.Ctx) error {
