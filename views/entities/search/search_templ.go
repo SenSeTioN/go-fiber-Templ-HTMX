@@ -31,9 +31,10 @@ func Search() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = input.InputText(input.InputProps{
+		templ_7745c5c3_Err = input.Input(input.InputProps{
 			PlaceholderText: "Найти новость",
 			IMGSrc:          "/public/images/icons/search.svg",
+			Type:            "text",
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

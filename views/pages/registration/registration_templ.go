@@ -12,7 +12,7 @@ import "sensetion/go-fiber/views/app/layout"
 import "sensetion/go-fiber/views/widgets/header"
 import "sensetion/go-fiber/views/widgets/footer"
 import "sensetion/go-fiber/views/widgets/mainTag"
-import "sensetion/go-fiber/views/features/registerForm"
+import "sensetion/go-fiber/views/features/forms"
 
 func RegistrationPage() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -67,7 +67,7 @@ func RegistrationPage() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = registerForm.RegisterForm().Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = forms.RegisterForm().Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

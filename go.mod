@@ -6,10 +6,12 @@ require (
 	github.com/a-h/templ v0.3.856
 	github.com/gobuffalo/validate v2.0.4+incompatible
 	github.com/gofiber/fiber/v2 v2.52.6
+	github.com/gofiber/storage/postgres/v3 v3.1.0
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.7.4
 	github.com/joho/godotenv v1.5.1
 	github.com/samber/slog-fiber v1.17.2
+	golang.org/x/crypto v0.31.0
 )
 
 require (
@@ -33,7 +35,6 @@ require (
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	go.opentelemetry.io/otel v1.29.0 // indirect
 	go.opentelemetry.io/otel/trace v1.29.0 // indirect
-	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/sync v0.12.0 // indirect
 	golang.org/x/sys v0.31.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
