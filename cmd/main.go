@@ -6,9 +6,13 @@ import (
 	"sensetion/go-fiber/internal/pages"
 	"sensetion/go-fiber/pkg/database"
 	"sensetion/go-fiber/pkg/logger"
+	"sensetion/go-fiber/pkg/middleware"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"github.com/gofiber/fiber/v2/middleware/session"
+	"github.com/gofiber/storage/postgres/v3"
 	slogfiber "github.com/samber/slog-fiber"
 )
 
@@ -28,10 +32,23 @@ func main() {
 	dbpool := database.CreateDBPool(dbConfig, customLogger)
 	defer dbpool.Close()
 
-	pages.SetupRoutes(&pages.SetupRoutesArgs{
+	//Storage Init
+	storage := postgres.New(postgres.Config{
+		DB:         dbpool,
+		Table:      "sessions",
+		Reset:      false,
+		GCInterval: 10 * time.Second,
+	})
+	store := session.New(session.Config{
+		Storage: storage,
+	})
+	app.Use(middleware.AuthMiddleware(store))
+
+	pages.SetupRoutes(&pages.SetupRoutesDeps{
 		App:    app,
 		DBPool: dbpool,
 		Logger: customLogger,
+		Store:  store,
 	})
 
 	port := config.GetPort()

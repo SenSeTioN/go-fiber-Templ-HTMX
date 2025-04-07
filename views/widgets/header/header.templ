@@ -7,6 +7,7 @@ import "sensetion/go-fiber/views/entities/tagsMenu"
 
 templ Header() {
 	@HeaderCSS()
+	{{ email := ctx.Value("email").(string) }}
 	<header class="header">
 		<div class="header__container">
 			<div class="header__container__left-menu">
@@ -29,22 +30,32 @@ templ Header() {
 			<div class="header__container__right-menu">
 				@search.Search()
 				<div class="header__container__right-menu-lk">
-					@title.Title(title.TitleProps{
-						Text:         "Вход",
-						Size:         "16px",
-						FontWeight:   "500",
-						Color:        "--color-light-grey",
-						IsActiveMenu: true,
-					})
-					<a href="/auth/registration">
-						@title.Title(title.TitleProps{
-							Text:         "Регистрация",
-							Size:         "16px",
-							FontWeight:   "500",
-							Color:        "--color-light-grey",
-							IsActiveMenu: true,
-						})
-					</a>
+					if email == "" {
+						<a href="/auth/login">
+							@title.Title(title.TitleProps{
+								Text:         "Вход",
+								Size:         "16px",
+								FontWeight:   "500",
+								Color:        "--color-light-grey",
+								IsActiveMenu: true,
+							})
+						</a>
+						<a href="/auth/registration">
+							@title.Title(title.TitleProps{
+								Text:         "Регистрация",
+								Size:         "16px",
+								FontWeight:   "500",
+								Color:        "--color-light-grey",
+								IsActiveMenu: true,
+							})
+						</a>
+					} else {
+						<span>{ email }</span>
+						<a
+							hx-get="/v1/api/auth/logout"
+							hx-trigger="click"
+						>Выйти </a>
+					}
 				</div>
 			</div>
 		</div>

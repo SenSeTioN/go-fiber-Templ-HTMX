@@ -1,0 +1,26 @@
+package login
+
+import (
+	"sensetion/go-fiber/views/app/layout"
+	"sensetion/go-fiber/views/features/forms"
+	"sensetion/go-fiber/views/widgets/footer"
+	"sensetion/go-fiber/views/widgets/header"
+	"sensetion/go-fiber/views/widgets/mainTag"
+)
+
+templ LoginPage() {
+	@LoginPageCSS()
+	@layout.Layout(layout.LayoutProps{
+		Title:           "Страница входа",
+		MetaDescription: "Страница входа",
+	}) {
+		@header.Header()
+		@mainTag.MainTag() {
+			@forms.LoginForm()
+		}
+		@footer.Footer()
+	}
+}
+
+templ LoginPageCSS() {
+}

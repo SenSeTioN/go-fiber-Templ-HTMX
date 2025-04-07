@@ -3,8 +3,9 @@ package search
 import "sensetion/go-fiber/views/shared/ui/input"
 
 templ Search() {
-	@input.InputText(input.InputProps{
+	@input.Input(input.InputProps{
 		PlaceholderText: "Найти новость",
 		IMGSrc:          "/public/images/icons/search.svg",
+		Type:            "text",
 	})
 }

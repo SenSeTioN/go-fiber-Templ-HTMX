@@ -13,11 +13,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-type UserRepository struct {
-	Dbpool       *pgxpool.Pool
-	CustomLogger *slog.Logger
-}
-
 func NewUserRepository(dbpool *pgxpool.Pool, customLogger *slog.Logger) UserRepository {
 	return UserRepository{
 		Dbpool:       dbpool,
@@ -64,4 +59,24 @@ func (r *UserRepository) GetUserByEmail(email string) (string, error) {
 	}
 
 	return user.Email, nil
+}
+
+func (r *UserRepository) GetUserByCredentials(email, password string) (*User, error) {
+	var user User
+	query := `SELECT id, email, password, name FROM users WHERE email = @email`
+
+	args := pgx.NamedArgs{
+		"email": email,
+	}
+
+	err := r.Dbpool.QueryRow(context.Background(), query, args).Scan(&user.ID, &user.Email, &user.Password, &user.Name)
+	if err != nil {
+		return nil, fmt.Errorf("не удалось получить пользователя: %w", err)
+	}
+
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password)); err != nil {
+		return nil, fmt.Errorf("пароль не совпадает: %w", err)
+	}
+
+	return &user, nil
 }
