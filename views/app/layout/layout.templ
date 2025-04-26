@@ -3,6 +3,7 @@ package layout
 type LayoutProps struct {
 	Title           string
 	MetaDescription string
+	IsSwiper        bool
 }
 
 templ Layout(props LayoutProps) {
@@ -18,10 +19,44 @@ templ Layout(props LayoutProps) {
 			<script src="https://unpkg.com/htmx.org@2.0.4"></script>
 			<link rel="stylesheet" href="/public/normalize.css"/>
 			<link rel="stylesheet" href="/public/styles.css"/>
+			if props.IsSwiper {
+				<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+				<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+			}
 			<meta name="description" content={ props.MetaDescription }/>
 		</head>
 		<body>
 			{ children... }
 		</body>
+		if props.IsSwiper {
+			<script>
+				const progressCircle = document.querySelector(".autoplay-progress svg");
+				const progressContent = document.querySelector(".autoplay-progress span");
+
+				const swiper = new Swiper(".mySwiper", {
+					spaceBetween: 30,
+					centeredSlides: true,
+					autoplay: {
+						delay: 100000,
+						disableOnInteraction: false,
+					},
+					pagination: {
+						el: ".swiper-pagination",
+						clickable: true,
+						dynamicBullets: true,
+					},
+					navigation: {
+						nextEl: ".swiper-button-next",
+						prevEl: ".swiper-button-prev",
+					},
+					on: {
+					autoplayTimeLeft(s, time, progress) {
+						progressCircle.style.setProperty("--progress", 1 - progress);
+						progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+					}
+				}
+				});
+			</script>
+		}
 	</html>
 }
