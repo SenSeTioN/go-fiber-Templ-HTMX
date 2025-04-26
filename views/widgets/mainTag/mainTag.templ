@@ -1,0 +1,23 @@
+package mainTag
+
+templ MainTag() {
+	@MainTagCSS()
+	<main class="main-content">
+		{ children... }
+	</main>
+}
+
+templ MainTagCSS() {
+	<style>
+		.main-content{
+			max-width: 1512px;
+			width: 100%;
+			display: flex;
+			padding-inline: 45px;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+
+	</style>
+}

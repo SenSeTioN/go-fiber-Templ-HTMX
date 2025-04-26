@@ -35,15 +35,19 @@ css titleClass(props TitleProps) {
 }
 
 templ Title(props TitleProps) {
-	@TitleCSS(props)
-	<h2 class={ titleClass(props), "active-menu" }>
+	@TitleCSS()
+	<h2
+		class={
+			titleClass(props),
+			templ.KV("active-menu", props.IsActiveMenu),
+		}
+	>
 		{ props.Text }
 	</h2>
 }
 
-templ TitleCSS(props TitleProps) {
-	if props.IsActiveMenu {
-		<style>
+templ TitleCSS() {
+	<style>
 		.active-menu {
 			cursor: pointer;
 		}
@@ -51,5 +55,4 @@ templ TitleCSS(props TitleProps) {
 			color: var(--color-light-grey-pr)
 		}
 	</style>
-	}
 }

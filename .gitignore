@@ -1,3 +1,7 @@
 /.env
 .vscode
 .cspell
+/tmp
+/postgres-data
+/sql
+.DS_Store

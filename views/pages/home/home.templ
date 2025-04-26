@@ -1,15 +1,42 @@
 package home
 
-import "sensetion/go-fiber/views/app/layout"
-import "sensetion/go-fiber/views/widgets/header"
-import "sensetion/go-fiber/views/widgets/footer"
+import (
+	"sensetion/go-fiber/views/app/layout"
+	"sensetion/go-fiber/views/features/gallery"
+	"sensetion/go-fiber/views/features/posts"
+	"sensetion/go-fiber/views/widgets/footer"
+	"sensetion/go-fiber/views/widgets/header"
+	"sensetion/go-fiber/views/widgets/mainTag"
+)
 
 templ HomePage() {
+	@HomePageCSS()
 	@layout.Layout(layout.LayoutProps{
 		Title:           "Статьи обо всем",
 		MetaDescription: "Сайт по поиску статей",
+		IsSwiper:        true,
 	}) {
 		@header.Header()
+		@mainTag.MainTag() {
+			<div class="hero-wrapper">
+				@posts.HeroPosts()
+				@gallery.Gallery()
+			</div>
+			@posts.Posts(posts.PostsProps{
+				IsPopular: true,
+			})
+		}
 		@footer.Footer()
 	}
+}
+
+templ HomePageCSS() {
+	<style>
+		.hero-wrapper{
+			display: flex;
+			align-items: center;
+			gap: 24px;
+			margin-top: 60px;
+		}
+	</style>
 }

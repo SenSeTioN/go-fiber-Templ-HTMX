@@ -64,3 +64,7 @@ func NewLogConfig() *LogConfig {
 		Format: getString("LOG_FORMAT", "json"),
 	}
 }
+
+func GetPort() string {
+	return getString("PORT", ":4242")
+}

@@ -1,0 +1,42 @@
+package posts
+
+import "sensetion/go-fiber/views/entities/card"
+
+templ HeroPosts() {
+	@HeroPostsCSS()
+	<div class="hero-posts-container">
+		for _, p := range getHeroPosts() {
+			@card.CardL(card.CardLProps{
+				Text:    p.Text,
+				SubText: p.SubText,
+				BGSrc:   p.BGSrc,
+			})
+		}
+	</div>
+}
+
+templ HeroPostsCSS() {
+	<style>
+		.hero-posts-container{
+			display: flex;
+			align-items: center;
+			width: 100%;
+			gap: 24px;
+		}
+	</style>
+}
+
+func getHeroPosts() []card.CardLProps {
+	return []card.CardLProps{
+		{
+			Text:    "Как безопасно водить",
+			SubText: "Длинный текст про то, как можно безопасно водить автомобиль.",
+			BGSrc:   "/public/images/bgs/unsplash_-oVaYMgBMbs.png",
+		},
+		{
+			Text:    "Создавай музыку!",
+			SubText: "Сегодня мы рассмотрим технику быстрого создания музыки за счёт использования...",
+			BGSrc:   "/public/images/bgs/unsplash_2ZOHXRaZfFQ.png",
+		},
+	}
+}

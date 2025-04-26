@@ -1,0 +1,27 @@
+package button
+
+templ FormBTN() {
+	@FormBTNCSS()
+	<button type="submit" class="form-btn">
+		{ children... }
+	</button>
+}
+
+templ FormBTNCSS() {
+	<style>
+		.form-btn{
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 12px 16px;
+			border: none;
+			border-radius: var(--border-radius-m);
+			background-color: var(--bg-light-pink);
+			cursor: pointer;
+
+			&:hover {
+				background-color: var(--bg-pink-h);
+			}
+		}
+	</style>
+}

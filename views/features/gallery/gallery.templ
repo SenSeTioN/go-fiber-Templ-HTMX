@@ -1,0 +1,152 @@
+package gallery
+
+import "sensetion/go-fiber/views/entities/card"
+
+templ Gallery() {
+	@GalleryCSS()
+	<div class="swiper mySwiper">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<img src="/public/images/bgs/unsplash_2ZOHXRaZfFQ.png" loading="lazy"/>
+				<div class="swiper-lazy-preloader"></div>
+			</div>
+			<div class="swiper-slide">
+				@card.CardXL(card.CardXLProps{
+					Text:    "123",
+					SubText: "sdadsa",
+					BGSrc:   "/public/images/bgs/unsplash_2ZOHXRaZfFQ.png",
+				})
+			</div>
+			<div class="swiper-slide">Slide 3</div>
+			<div class="swiper-slide">Slide 4</div>
+			<div class="swiper-slide">Slide 5</div>
+			<div class="swiper-slide">Slide 6</div>
+			<div class="swiper-slide">Slide 7</div>
+			<div class="swiper-slide">Slide 8</div>
+			<div class="swiper-slide">Slide 9</div>
+		</div>
+		<div class="swiper-button-next"></div>
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-pagination"></div>
+		<div class="autoplay-progress">
+			<svg viewBox="0 0 48 48">
+				<circle cx="24" cy="24" r="20"></circle>
+			</svg>
+			<span></span>
+		</div>
+	</div>
+}
+
+templ GalleryCSS() {
+	<style>
+		.swiper {
+			max-width: 750px;
+			width: 100%;
+			height: 455px;
+			border-radius: var(--border-radius-m);
+			overflow: hidden;
+		}
+		.autoplay-progress {
+      position: absolute;
+      left: 12px;
+      bottom: 30px;
+      z-index: 10;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--color-orange);
+    }
+
+    .autoplay-progress svg {
+      --progress: 0;
+      position: absolute;
+      left: 0;
+      top: 0px;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      stroke-width: 4px;
+      stroke: var(--color-orange);
+      fill: none;
+      stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
+      stroke-dasharray: 125.6;
+      transform: rotate(-90deg);
+    }
+
+		.swiper-slide {
+			background-color: var(--color-light-grey-pr);
+		}
+
+		.swiper-pagination{
+			padding: 0 20px 6px 0 ;
+		}
+
+		.swiper-horizontal>.swiper-pagination-bullets.swiper-pagination-bullets-dynamic, .swiper-pagination-horizontal.swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+			left: 80%;
+			transform: translateX(-12%);
+		}
+
+		.swiper-pagination-bullet-active-prev {
+			opacity: 0.75;
+		}
+
+		.swiper-pagination-bullet-active-next {
+			opacity: 0.75;
+		}
+
+		.swiper-pagination-bullet{
+			background-color: var(--color-white);
+			width: 10px;
+			height: 10px;
+			opacity: 0.75;
+		}
+
+		.swiper-pagination-bullet-active{
+			background-color: var(--color-white);
+			border-radius: var(--border-radius-s);
+			width: 27px;
+			height: 10px;
+			opacity: 1;
+		}
+
+		.swiper-slide img {
+			object-fit: cover;
+			width: 100%;
+			height: 100%;
+		}
+
+		.swiper-button-next{
+			color: var(--color-light-grey);
+			max-width: 40px;
+			max-height: 40px;
+			width: 100%;
+			height: 100%;
+			border-radius: var(--border-radius-m);
+			background-color: var(--bg-light-grey);
+		}
+
+		.swiper-button-next::after{
+			font-size: 16px;
+			font-weight: 900;
+		}
+
+		.swiper-button-prev{
+			color: var(--color-light-grey);
+			max-width: 40px;
+			max-height: 40px;
+			width: 100%;
+			height: 100%;
+			border-radius: var(--border-radius-m);
+			background-color: var(--bg-light-grey);
+		}
+
+		.swiper-button-prev::after{
+			font-size: 18px;
+			font-weight: 900;
+		}
+
+	</style>
+}
