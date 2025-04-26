@@ -3,9 +3,12 @@ testdata_dir = "testdata"
 tmp_dir      = "tmp"
 
 [build]
-args_bin          = []
-bin               = "tmp\\main.exe"
-cmd               = "go build -o ./tmp/main.exe ./cmd/main.go"
+args_bin = []
+# window
+# bin               = "tmp\\main.exe"
+# cmd               = "go build -o ./tmp/main.exe ./cmd/main.go"
+bin               = "tmp/main"
+cmd               = "go build -o ./tmp/main ./cmd/main.go"
 delay             = 1000
 exclude_dir       = ["public", "tmp", "vendor", "testdata"]
 exclude_file      = []
